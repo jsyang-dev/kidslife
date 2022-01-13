@@ -1,1 +1,5 @@
 rootProject.name = 'kidslife'
+include 'kidslife-api'
+include 'kidslife-domain'
+include 'config'
+

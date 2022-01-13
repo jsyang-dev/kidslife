@@ -1,0 +1,20 @@
+dependencies {
+    // spring
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // handlebars
+    implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0'
+
+    // orm
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // db
+    runtimeOnly 'mysql:mysql-connector-java'
+    runtimeOnly 'com.h2database:h2'
+
+    // test
+    testImplementation 'io.rest-assured:rest-assured:3.3.0'
+
+    // module
+    implementation project(':kidslife-domain')
+}
