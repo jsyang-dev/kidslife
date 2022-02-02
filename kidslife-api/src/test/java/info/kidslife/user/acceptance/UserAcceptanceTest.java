@@ -2,11 +2,14 @@ package info.kidslife.user.acceptance;
 
 import info.kidslife.AcceptanceTest;
 import info.kidslife.user.application.dto.UserRequest;
+import info.kidslife.user.domain.UserType;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
+
+import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -17,7 +20,14 @@ public class UserAcceptanceTest extends AcceptanceTest {
     @DisplayName("부모 사용자를 저장한다.")
     void createParent() {
         // given
-        UserRequest userRequest = new UserRequest();
+        UserRequest userRequest = UserRequest.builder()
+                .userType(UserType.PARENT)
+                .email("parent@email.com")
+                .password("1234")
+                .name("parent")
+                .phone("01012345678")
+                .birthday(LocalDate.of(1983, 1, 1))
+                .build();
 
         // when
         ExtractableResponse<Response> response = post("/user", userRequest);
@@ -30,7 +40,14 @@ public class UserAcceptanceTest extends AcceptanceTest {
     @DisplayName("자녀 사용자를 저장한다.")
     void createChild() {
         // given
-        UserRequest userRequest = new UserRequest();
+        UserRequest userRequest = UserRequest.builder()
+                .userType(UserType.CHILD)
+                .email("child@email.com")
+                .password("1234")
+                .name("child")
+                .phone("01012345678")
+                .birthday(LocalDate.of(2009, 1, 1))
+                .build();
 
         // when
         ExtractableResponse<Response> response = post("/user", userRequest);

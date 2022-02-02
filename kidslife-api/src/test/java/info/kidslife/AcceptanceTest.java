@@ -19,7 +19,7 @@ import org.springframework.test.context.ActiveProfiles;
 public abstract class AcceptanceTest {
 
     @LocalServerPort
-    int port;
+    private int port;
 
     @Autowired
     private DatabaseCleanup databaseCleanup;
@@ -27,7 +27,7 @@ public abstract class AcceptanceTest {
     @BeforeEach
     public void setUp() {
         RestAssured.port = port;
-        databaseCleanup.execute();
+//        databaseCleanup.execute();
     }
 
     public static ExtractableResponse<Response> get(String uri, Object... params) {
