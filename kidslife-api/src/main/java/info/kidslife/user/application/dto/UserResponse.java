@@ -37,6 +37,7 @@ public class UserResponse {
                 .name(user.getName())
                 .phone(user.getPhone())
                 .birthday(user.getBirthday())
+                .userType(user.getUserType())
                 .build();
     }
 }

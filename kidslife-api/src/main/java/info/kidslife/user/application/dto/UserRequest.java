@@ -16,9 +16,6 @@ import java.time.LocalDate;
 @Getter
 public class UserRequest {
 
-    @NotNull
-    private final UserType userType;
-
     @NotBlank
     @Email
     private final String email;
@@ -36,8 +33,11 @@ public class UserRequest {
     @NotNull
     private final LocalDate birthday;
 
+    @NotNull
+    private final UserType userType;
+
     @Builder
-    private UserRequest(UserType userType, String email, String password, String name, String phone, LocalDate birthday) {
+    private UserRequest(String email, String password, String name, String phone, LocalDate birthday, UserType userType) {
         this.userType = userType;
         this.email = email;
         this.password = password;

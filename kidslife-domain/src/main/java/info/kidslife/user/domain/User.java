@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +19,7 @@ import java.time.LocalDate;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "user_type")
+@DiscriminatorColumn(name = "userType")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class User extends BaseEntity {
@@ -41,11 +43,16 @@ public abstract class User extends BaseEntity {
     @Column(nullable = false)
     private LocalDate birthday;
 
-    protected User(String email, String password, String name, String phone, LocalDate birthday) {
+    @Column(insertable = false, updatable = false)
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
+
+    protected User(String email, String password, String name, String phone, LocalDate birthday, UserType userType) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.phone = phone;
         this.birthday = birthday;
+        this.userType = userType;
     }
 }

@@ -18,7 +18,8 @@ public class UserService {
     }
 
     public UserResponse create(UserRequest userRequest) {
-        final User savedUser = userRepository.save(userRequest.toUser());
+        final User user = userRequest.toUser();
+        final User savedUser = userRepository.save(user);
         return UserResponse.from(savedUser);
     }
 }
