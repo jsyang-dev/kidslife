@@ -20,7 +20,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
     @DisplayName("부모 사용자를 저장한다.")
     void createParent() {
         // given
-        UserRequest userRequest = UserRequest.builder()
+        final UserRequest userRequest = UserRequest.builder()
                 .userType(UserType.PARENT)
                 .email("parent@email.com")
                 .password("1234")
@@ -40,7 +40,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
     @DisplayName("자녀 사용자를 저장한다.")
     void createChild() {
         // given
-        UserRequest userRequest = UserRequest.builder()
+        final UserRequest userRequest = UserRequest.builder()
                 .userType(UserType.CHILD)
                 .email("child@email.com")
                 .password("1234")

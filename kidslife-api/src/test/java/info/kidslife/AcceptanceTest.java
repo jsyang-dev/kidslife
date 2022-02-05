@@ -31,7 +31,7 @@ public abstract class AcceptanceTest {
     }
 
     public static ExtractableResponse<Response> get(String uri, Object... params) {
-        return given()
+        return givenSpec()
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .when().get(uri, params)
                 .then().log().all()
@@ -39,7 +39,7 @@ public abstract class AcceptanceTest {
     }
 
     public static <T> ExtractableResponse<Response> post(String uri, T body, Object... params) {
-        return given()
+        return givenSpec()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(body)
                 .when().post(uri, params)
@@ -48,7 +48,7 @@ public abstract class AcceptanceTest {
     }
 
     public static <T> ExtractableResponse<Response> put(String uri, T body, Object... params) {
-        return given()
+        return givenSpec()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(body)
                 .when().put(uri, params)
@@ -57,13 +57,13 @@ public abstract class AcceptanceTest {
     }
 
     public static ExtractableResponse<Response> delete(String uri, Object... params) {
-        return given()
+        return givenSpec()
                 .when().delete(uri, params)
                 .then().log().all()
                 .extract();
     }
 
-    private static RequestSpecification given() {
+    private static RequestSpecification givenSpec() {
         return RestAssured
                 .given().log().all();
     }
