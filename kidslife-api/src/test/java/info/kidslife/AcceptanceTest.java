@@ -27,7 +27,7 @@ public abstract class AcceptanceTest {
 //        databaseCleanup.execute();
     }
 
-    protected static RequestSpecification givenSpec() {
+    public static RequestSpecification givenSpec() {
         return RestAssured
                 .given().log().all();
     }
