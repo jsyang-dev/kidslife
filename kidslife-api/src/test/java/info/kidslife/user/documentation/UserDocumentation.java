@@ -34,7 +34,8 @@ public class UserDocumentation extends Documentation {
     @DisplayName("사용자를 저장한다.")
     void create() {
         // given
-        final UserRequest userRequest = UserRequest.builder()
+        final UserResponse userResponse = UserResponse.builder()
+                .id(1L)
                 .userType(UserType.PARENT)
                 .email("parent@email.com")
                 .password("1234")
@@ -42,7 +43,7 @@ public class UserDocumentation extends Documentation {
                 .phone("01012345678")
                 .birthday(LocalDate.of(1983, 1, 1))
                 .build();
-        final UserResponse userResponse = objectMapper.convertValue(userRequest, UserResponse.class);
+        final UserRequest userRequest = objectMapper.convertValue(userResponse, UserRequest.class);
         given(userService.create(any())).willReturn(userResponse);
 
         FieldDescriptor[] requestFieldDescriptors = {
