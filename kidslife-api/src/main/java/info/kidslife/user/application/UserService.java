@@ -7,6 +7,8 @@ import info.kidslife.user.domain.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 @Transactional
 public class UserService {
@@ -21,5 +23,11 @@ public class UserService {
         final User user = userRequest.toUser();
         final User savedUser = userRepository.save(user);
         return UserResponse.from(savedUser);
+    }
+
+    public UserResponse find(Long id) {
+        final User user = userRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        return UserResponse.from(user);
     }
 }
