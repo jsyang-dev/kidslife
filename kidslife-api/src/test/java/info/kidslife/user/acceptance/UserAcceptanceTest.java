@@ -2,6 +2,7 @@ package info.kidslife.user.acceptance;
 
 import info.kidslife.AcceptanceTest;
 import info.kidslife.user.application.dto.UserRequest;
+import info.kidslife.user.application.dto.UserResponse;
 import info.kidslife.user.domain.UserType;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 
 import java.time.LocalDate;
 
+import static info.kidslife.user.UserSteps.*;
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("사용자 인수 테스트")
@@ -30,7 +32,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
                 .build();
 
         // when
-        ExtractableResponse<Response> response = post("/user", userRequest);
+        ExtractableResponse<Response> response = 사용자_저장_요청(givenSpec(), userRequest);
 
         // then
         사용자_저장됨(response);
@@ -50,14 +52,40 @@ public class UserAcceptanceTest extends AcceptanceTest {
                 .build();
 
         // when
-        ExtractableResponse<Response> response = post("/user", userRequest);
+        ExtractableResponse<Response> response = 사용자_저장_요청(givenSpec(), userRequest);
 
         // then
         사용자_저장됨(response);
     }
 
+    @Test
+    @DisplayName("사용자를 조회한다.")
+    void find() {
+        // given
+        final UserResponse userResponse = 사용자_저장되어_있음(
+                UserRequest.builder()
+                        .userType(UserType.PARENT)
+                        .email("parent@email.com")
+                        .password("1234")
+                        .name("parent")
+                        .phone("01012345678")
+                        .birthday(LocalDate.of(1983, 1, 1))
+                        .build()
+        );
+
+        // when
+        ExtractableResponse<Response> response = 사용자_조회_요청(givenSpec(), userResponse.getId());
+
+        // then
+        사용자_조회됨(response);
+    }
+
     private void 사용자_저장됨(ExtractableResponse<Response> response) {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
         assertThat(response.header("Location")).isNotBlank();
+    }
+
+    private void 사용자_조회됨(ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 }

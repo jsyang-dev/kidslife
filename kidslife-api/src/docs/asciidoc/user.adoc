@@ -1,0 +1,47 @@
+[[user]]
+== 사용자 관리
+
+=== 사용자 저장
+
+==== HTTP Request
+
+include::{snippets}/createUser/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/createUser/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/createUser/curl-request.adoc[]
+
+==== Request Fields
+
+include::{snippets}/createUser/request-fields.adoc[]
+
+==== Response Fields
+
+include::{snippets}/createUser/response-fields.adoc[]
+
+
+=== 사용자 조회
+
+==== HTTP Request
+
+include::{snippets}/findUser/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/findUser/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/findUser/curl-request.adoc[]
+
+==== Path Parameter
+
+include::{snippets}/findUser/path-parameters.adoc[]
+
+==== Response Fields
+
+include::{snippets}/findUser/response-fields.adoc[]
