@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 
 import java.time.LocalDate;
 
+import static info.kidslife.user.UserSteps.*;
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("사용자 인수 테스트")
@@ -30,7 +31,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
                 .build();
 
         // when
-        ExtractableResponse<Response> response = post("/user", userRequest);
+        ExtractableResponse<Response> response = 사용자_저장_요청(givenSpec(), userRequest);
 
         // then
         사용자_저장됨(response);
@@ -50,7 +51,7 @@ public class UserAcceptanceTest extends AcceptanceTest {
                 .build();
 
         // when
-        ExtractableResponse<Response> response = post("/user", userRequest);
+        ExtractableResponse<Response> response = 사용자_저장_요청(givenSpec(), userRequest);
 
         // then
         사용자_저장됨(response);

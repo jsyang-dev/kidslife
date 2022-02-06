@@ -10,11 +10,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.FieldDescriptor;
 
 import java.time.LocalDate;
 
+import static info.kidslife.user.UserSteps.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
@@ -62,13 +62,13 @@ public class UserDocumentation extends Documentation {
         };
 
         // when
-        givenSpec("user-create", requestFields(requestFieldDescriptors), responseFields(responseFieldDescriptors))
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(userRequest)
-                .when().post("/user")
-                .then().log().all()
-                .extract();
-
-        // then
+        사용자_저장_요청(
+                givenSpec(
+                        "user-create",
+                        requestFields(requestFieldDescriptors),
+                        responseFields(responseFieldDescriptors)
+                ),
+                userRequest
+        );
     }
 }
