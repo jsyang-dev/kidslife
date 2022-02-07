@@ -1,5 +1,6 @@
 package info.kidslife.user;
 
+import info.kidslife.user.application.dto.ChildRequest;
 import info.kidslife.user.application.dto.UserRequest;
 import info.kidslife.user.application.dto.UserResponse;
 import io.restassured.response.ExtractableResponse;
@@ -30,6 +31,15 @@ public class UserSteps {
         return givenSpec
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when().get(USER_URI + "/{id}", id)
+                .then().log().all()
+                .extract();
+    }
+
+    public static ExtractableResponse<Response> 자녀_추가_요청(RequestSpecification givenSpec, Long parentId, ChildRequest childRequest) {
+        return givenSpec
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(childRequest)
+                .when().post(USER_URI + "/{id}/child", parentId)
                 .then().log().all()
                 .extract();
     }
