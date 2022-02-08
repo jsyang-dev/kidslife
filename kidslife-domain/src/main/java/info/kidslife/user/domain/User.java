@@ -22,7 +22,7 @@ import java.time.LocalDate;
 @DiscriminatorColumn(name = "userType")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class User extends BaseEntity {
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,5 +54,13 @@ public abstract class User extends BaseEntity {
         this.phone = phone;
         this.birthday = birthday;
         this.userType = userType;
+    }
+
+    public boolean isParent() {
+        return userType.equals(UserType.PARENT);
+    }
+
+    public boolean isChild() {
+        return userType.equals(UserType.CHILD);
     }
 }

@@ -12,7 +12,7 @@ import static info.kidslife.AcceptanceTest.*;
 
 public class UserSteps {
 
-    public static final String USER_URI = "/user";
+    public static final String USER_URI = "/users";
 
     public static UserResponse 사용자_저장되어_있음(UserRequest userRequest) {
         return 사용자_저장_요청(givenSpec(), userRequest).as(UserResponse.class);
@@ -39,7 +39,7 @@ public class UserSteps {
         return givenSpec
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(childRequest)
-                .when().post(USER_URI + "/{id}/child", parentId)
+                .when().post(USER_URI + "/{parentId}/child", parentId)
                 .then().log().all()
                 .extract();
     }

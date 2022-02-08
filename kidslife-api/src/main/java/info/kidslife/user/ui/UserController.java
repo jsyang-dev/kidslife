@@ -1,6 +1,7 @@
 package info.kidslife.user.ui;
 
 import info.kidslife.user.application.UserService;
+import info.kidslife.user.application.dto.ChildRequest;
 import info.kidslife.user.application.dto.UserRequest;
 import info.kidslife.user.application.dto.UserResponse;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -35,5 +36,11 @@ public class UserController {
     public ResponseEntity<UserResponse> find(@PathVariable Long id) {
         final UserResponse userResponse = userService.find(id);
         return ResponseEntity.ok(userResponse);
+    }
+
+    @PostMapping("/{parentId}/child")
+    public ResponseEntity<Void> addChild(@PathVariable Long parentId, @RequestBody @Valid ChildRequest childRequest) {
+        userService.addChild(parentId, childRequest);
+        return ResponseEntity.ok().build();
     }
 }
