@@ -45,3 +45,26 @@ include::{snippets}/findUser/path-parameters.adoc[]
 ==== Response Fields
 
 include::{snippets}/findUser/response-fields.adoc[]
+
+
+=== 자녀 추가
+
+==== HTTP Request
+
+include::{snippets}/addChild/http-request.adoc[]
+
+==== HTTP Response
+
+include::{snippets}/addChild/http-response.adoc[]
+
+==== CURL Request
+
+include::{snippets}/addChild/curl-request.adoc[]
+
+==== Path Parameter
+
+include::{snippets}/addChild/path-parameters.adoc[]
+
+==== Request Fields
+
+include::{snippets}/addChild/request-fields.adoc[]

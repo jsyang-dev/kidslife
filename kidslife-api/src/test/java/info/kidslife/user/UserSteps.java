@@ -1,5 +1,6 @@
 package info.kidslife.user;
 
+import info.kidslife.user.application.dto.ChildRequest;
 import info.kidslife.user.application.dto.UserRequest;
 import info.kidslife.user.application.dto.UserResponse;
 import io.restassured.response.ExtractableResponse;
@@ -11,7 +12,7 @@ import static info.kidslife.AcceptanceTest.*;
 
 public class UserSteps {
 
-    public static final String USER_URI = "/user";
+    public static final String USER_URI = "/users";
 
     public static UserResponse 사용자_저장되어_있음(UserRequest userRequest) {
         return 사용자_저장_요청(givenSpec(), userRequest).as(UserResponse.class);
@@ -30,6 +31,15 @@ public class UserSteps {
         return givenSpec
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when().get(USER_URI + "/{id}", id)
+                .then().log().all()
+                .extract();
+    }
+
+    public static ExtractableResponse<Response> 자녀_추가_요청(RequestSpecification givenSpec, Long parentId, ChildRequest childRequest) {
+        return givenSpec
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(childRequest)
+                .when().post(USER_URI + "/{parentId}/child", parentId)
                 .then().log().all()
                 .extract();
     }
