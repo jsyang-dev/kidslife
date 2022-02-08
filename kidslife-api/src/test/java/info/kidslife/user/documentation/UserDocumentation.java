@@ -3,6 +3,7 @@ package info.kidslife.user.documentation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import info.kidslife.Documentation;
 import info.kidslife.user.application.UserService;
+import info.kidslife.user.application.dto.ChildRequest;
 import info.kidslife.user.application.dto.UserRequest;
 import info.kidslife.user.application.dto.UserResponse;
 import info.kidslife.user.domain.UserType;
@@ -111,6 +112,31 @@ public class UserDocumentation extends Documentation {
                         responseFields(responseFieldDescriptors)
                 ),
                 userResponse.getId()
+        );
+    }
+
+    @Test
+    @DisplayName("자녀를 추가한다.")
+    void addChild() {
+        // given
+        ParameterDescriptor[] pathParameterDescriptors = {
+                parameterWithName("parentId").description("부모 사용자 ID"),
+        };
+        FieldDescriptor[] requestFieldDescriptors = {
+                fieldWithPath("childId").description("자녀 사용자 ID"),
+        };
+
+        // when
+        자녀_추가_요청(
+                givenSpec(
+                        "addChild",
+                        pathParameters(pathParameterDescriptors),
+                        requestFields(requestFieldDescriptors)
+                ),
+                1L,
+                ChildRequest.builder()
+                        .childId(2L)
+                        .build()
         );
     }
 }
